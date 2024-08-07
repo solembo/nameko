@@ -18,7 +18,7 @@ def get_event_exchange(service_name, config):
     exchange = Exchange(
         exchange_name,
         type='topic',
-        durable=True,
+        durable=False,
         delivery_mode=PERSISTENT,
         auto_delete=auto_delete,
         no_declare=disable_exchange_declaration,
