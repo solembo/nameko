@@ -12,13 +12,14 @@ def get_event_exchange(service_name, config):
     """ Get an exchange for ``service_name`` events.
     """
     auto_delete = config.get("AUTO_DELETE_EVENT_EXCHANGES")
+    durable = config.get("DURABLE_EXCHANGE")
     disable_exchange_declaration = config.get("DECLARE_EVENT_EXCHANGES") is False
 
     exchange_name = "{}.events".format(service_name)
     exchange = Exchange(
         exchange_name,
         type='topic',
-        durable=False,
+        durable=durable or True,
         delivery_mode=PERSISTENT,
         auto_delete=auto_delete,
         no_declare=disable_exchange_declaration,
